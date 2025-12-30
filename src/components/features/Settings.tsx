@@ -22,7 +22,7 @@ export function Settings() {
 
     return (
         <div className="space-y-4">
-            <h2 className="text-xl font-bold">設定</h2>
+            <h2 className="text-xl font-bold font-outfit text-emerald-400">設定</h2>
 
             <Card>
                 <CardHeader>
@@ -57,13 +57,22 @@ export function Settings() {
                         label="持ち点"
                         type="number"
                         value={settings.basePoint}
-                        onChange={(e) => handleChange('basePoint', Number(e.target.value))}
+                        onChange={(e) => {
+                            const val = Number(e.target.value);
+                            // 万が一文字列結合されて100万を超えた場合などはバリバリに制限をかける
+                            if (val > 1000000) return;
+                            handleChange('basePoint', val);
+                        }}
                     />
                     <Input
                         label="返し点"
                         type="number"
                         value={settings.returnPoint}
-                        onChange={(e) => handleChange('returnPoint', Number(e.target.value))}
+                        onChange={(e) => {
+                            const val = Number(e.target.value);
+                            if (val > 1000000) return;
+                            handleChange('returnPoint', val);
+                        }}
                     />
                     <Input
                         label="レート (1000点あたりの円)"
@@ -88,15 +97,15 @@ export function Settings() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                     {settings.mode === '3ma' && (
-                        <div className="flex items-center space-x-2 pb-4 border-b border-gray-100 dark:border-gray-800">
+                        <div className="flex items-center space-x-2 pb-4 border-b border-emerald-900/30">
                             <input
                                 type="checkbox"
                                 id="conditionalUma"
                                 checked={!!settings.useConditional3maUma}
                                 onChange={(e) => setSettings({ ...settings, useConditional3maUma: e.target.checked })}
-                                className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
+                                className="h-4 w-4 rounded border-emerald-800 bg-emerald-950/60 text-emerald-500 focus:ring-brand accent-emerald-500"
                             />
-                            <label htmlFor="conditionalUma" className="text-sm font-medium">
+                            <label htmlFor="conditionalUma" className="text-sm font-medium text-emerald-50/80">
                                 2位が30000点未満で変動させる
                             </label>
                         </div>
@@ -117,7 +126,7 @@ export function Settings() {
                     ) : (
                         <div className="space-y-6">
                             <div>
-                                <label className="text-xs font-bold text-gray-500 block mb-2">2位 &lt; 30000点 (Aパターン)</label>
+                                <label className="text-[10px] font-bold text-emerald-500/60 uppercase tracking-wider ml-1 block mb-1">2位 &lt; 30000点 (Aパターン)</label>
                                 <div className="grid grid-cols-3 gap-2">
                                     {(settings.uma3maBelow30k || [30, -10, -20]).map((value, index) => (
                                         <Input
@@ -135,7 +144,7 @@ export function Settings() {
                                 </div>
                             </div>
                             <div>
-                                <label className="text-xs font-bold text-gray-500 block mb-2">2位 &gt;= 30000点 (Bパターン)</label>
+                                <label className="text-[10px] font-bold text-emerald-500/60 uppercase tracking-wider ml-1 block mb-1">2位 &gt;= 30000点 (Bパターン)</label>
                                 <div className="grid grid-cols-3 gap-2">
                                     {(settings.uma3maAbove30k || [20, 10, -30]).map((value, index) => (
                                         <Input
@@ -157,7 +166,7 @@ export function Settings() {
                 </CardContent>
             </Card>
 
-            <div className="text-sm text-gray-500 text-center pb-4">
+            <div className="text-[10px] uppercase tracking-[0.2em] text-emerald-900/40 text-center py-8 font-bold">
                 JanLog v0.1.0
             </div>
         </div>

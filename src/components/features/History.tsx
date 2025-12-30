@@ -26,7 +26,8 @@ export function History() {
 
     // Group Results by Date (YYYY-MM-DD)
     const groupedResults = results.reduce<Record<string, typeof results>>((acc, result) => {
-        const date = new Date(result.date).toLocaleDateString('ja-JP');
+        // Use ISO string for consistent sorting and grouping
+        const date = result.date.split('T')[0];
         if (!acc[date]) {
             acc[date] = [];
         }
@@ -46,8 +47,8 @@ export function History() {
         }
     };
 
-    // Sort dates Ascending (Oldest First)
-    const dates = Object.keys(groupedResults).sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
+    // Sort dates Descending (Newest First)
+    const dates = Object.keys(groupedResults).sort((a, b) => b.localeCompare(a));
 
     // Also sort the results within each date Ascending (Oldest First)
     dates.forEach(date => {
@@ -56,7 +57,7 @@ export function History() {
 
     return (
         <div className="space-y-8">
-            <h2 className="text-xl font-bold">戦績履歴</h2>
+            <h2 className="text-xl font-bold font-outfit text-emerald-400">戦績履歴</h2>
 
             {/* Summary Card */}
             <Card>
@@ -64,30 +65,30 @@ export function History() {
                     <CardTitle>通算成績</CardTitle>
                 </CardHeader>
                 <CardContent className="p-0">
-                    <div className="overflow-x-auto">
-                        <table className="w-full text-sm text-center">
-                            <thead className="bg-gray-50 dark:bg-gray-800 text-gray-500">
+                    <div className="overflow-x-auto scrollbar-hide">
+                        <table className="w-full text-sm text-center border-collapse">
+                            <thead className="bg-emerald-950/80 text-emerald-500/80 text-[10px] font-bold uppercase tracking-wider border-b border-emerald-900/40">
                                 <tr>
-                                    <th className="px-4 py-2 font-medium">順位</th>
-                                    <th className="px-4 py-2 font-medium">名前</th>
-                                    <th className="px-4 py-2 font-medium">対局数</th>
-                                    <th className="px-4 py-2 font-medium">合計</th>
+                                    <th className="px-4 py-3">順位</th>
+                                    <th className="px-4 py-3">名前</th>
+                                    <th className="px-4 py-3">対局数</th>
+                                    <th className="px-4 py-3">合計</th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
+                            <tbody className="divide-y divide-emerald-900/20">
                                 {playerStats.map((stat, i) => (
-                                    <tr key={stat.id}>
-                                        <td className="px-4 py-2">{i + 1}</td>
-                                        <td className="px-4 py-2 font-medium">{stat.name}</td>
-                                        <td className="px-4 py-2 text-gray-500">{stat.games}</td>
-                                        <td className={`px-4 py-2 font-bold ${stat.totalPoints > 0 ? 'text-blue-600' : stat.totalPoints < 0 ? 'text-red-500' : ''}`}>
+                                    <tr key={stat.id} className="hover:bg-emerald-500/5 transition-colors">
+                                        <td className="px-4 py-3 text-emerald-900/60 font-outfit">{i + 1}</td>
+                                        <td className="px-4 py-3 font-bold text-emerald-100">{stat.name}</td>
+                                        <td className="px-4 py-3 text-emerald-400/60 font-outfit">{stat.games}</td>
+                                        <td className={`px-4 py-3 font-bold font-outfit text-base ${stat.totalPoints > 0 ? 'text-emerald-400' : stat.totalPoints < 0 ? 'text-rose-400' : 'text-emerald-900/40'}`}>
                                             {stat.totalPoints > 0 ? '+' : ''}{stat.totalPoints.toFixed(1)}
                                         </td>
                                     </tr>
                                 ))}
                                 {playerStats.length === 0 && (
                                     <tr>
-                                        <td colSpan={4} className="px-4 py-8 text-center text-gray-400">データがありません</td>
+                                        <td colSpan={4} className="px-4 py-12 text-center text-emerald-900/40">データがありません</td>
                                     </tr>
                                 )}
                             </tbody>
@@ -97,7 +98,7 @@ export function History() {
             </Card>
 
             {/* Daily Tables */}
-            <h3 className="text-lg font-bold">対局ログ</h3>
+            <h3 className="text-lg font-bold font-outfit text-emerald-400/80 ml-1">対局ログ</h3>
             {dates.length === 0 ? (
                 <p className="text-gray-500 text-center py-4">履歴はありません</p>
             ) : (

@@ -9,8 +9,8 @@ interface LayoutProps {
 
 export function Layout({ children, currentTab, onTabChange }: LayoutProps) {
     return (
-        <div className="min-h-screen bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100">
-            <main className="mx-auto max-w-md p-4 pb-24 min-h-screen box-border">
+        <div className="min-h-screen bg-mesh text-slate-200">
+            <main className="mx-auto max-w-md p-4 pb-28 min-h-screen box-border animate-fade-in">
                 {children}
             </main>
             <Navbar currentTab={currentTab} onTabChange={onTabChange} />

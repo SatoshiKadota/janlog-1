@@ -170,10 +170,10 @@ export function ScoreInput() {
                 <h2 className="text-xl font-bold">{editingId ? 'スコア修正' : 'スコア入力'}</h2>
                 <Card className={editingId ? 'border-blue-500 border-2' : ''}>
                     <CardHeader className="pb-4">
-                        <div className="flex justify-between items-center">
-                            <CardTitle>{editingId ? '修正中の対局' : '対局結果'}</CardTitle>
-                            <div className="text-sm font-normal text-gray-500">
-                                合計: {inputScores.reduce((a, b) => a + Number(b), 0)} / {settings.basePoint * playerCount}
+                        <div className="flex justify-between items-end">
+                            <CardTitle className="text-2xl">{editingId ? '修正中の対局' : '対局結果'}</CardTitle>
+                            <div className="text-xs font-bold font-outfit text-slate-400 uppercase tracking-widest">
+                                TOTAL: <span className="text-white text-sm">{inputScores.reduce((a, b) => a + Number(b), 0)}</span> / {settings.basePoint * playerCount}
                             </div>
                         </div>
                     </CardHeader>
@@ -185,34 +185,36 @@ export function ScoreInput() {
                         )}
 
                         {Array.from({ length: playerCount }).map((_, i) => (
-                            <div key={i} className="flex gap-2 items-end">
-                                <div className="flex-1 space-y-1">
-                                    <label className="text-xs text-gray-500">{i + 1}着 (仮)</label>
+                            <div key={i} className="grid grid-cols-[1fr_120px_80px] gap-3 items-end p-4 rounded-2xl bg-emerald-950/40 border border-emerald-900/40 hover:border-brand/40 transition-all group">
+                                <div className="space-y-1.5 min-w-0">
+                                    <label className="text-xs font-bold text-emerald-500/80 uppercase tracking-wider ml-1">{i + 1}着 (仮)</label>
                                     <select
-                                        className="w-full h-10 rounded-md border border-gray-300 bg-white px-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-900"
+                                        className="w-full h-11 rounded-xl border border-emerald-900/50 bg-emerald-950/60 px-3 text-sm text-emerald-50 focus:outline-none focus:ring-2 focus:ring-brand transition-all appearance-none"
                                         value={selectedPlayers[i]}
                                         onChange={(e) => handlePlayerSelect(i, e.target.value)}
                                     >
-                                        <option value="">選択...</option>
+                                        <option value="" className="bg-emerald-950">選択...</option>
                                         {players.map(p => (
-                                            <option key={p.id} value={p.id}>{p.name}</option>
+                                            <option key={p.id} value={p.id} className="bg-emerald-950">{p.name}</option>
                                         ))}
                                     </select>
                                 </div>
-                                <div className="w-24 space-y-1">
-                                    <label className="text-xs text-gray-500">点数</label>
+                                <div className="space-y-1.5">
+                                    <label className="text-xs font-bold text-emerald-500/80 uppercase tracking-wider ml-1">点数</label>
                                     <input
                                         type="number"
                                         step="100"
-                                        className="w-full h-10 rounded-md border border-gray-300 bg-white px-3 text-right font-mono text-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-900"
+                                        className="w-full h-11 rounded-xl border border-emerald-900/50 bg-emerald-950/60 px-3 text-right font-outfit text-lg font-semibold text-emerald-400 focus:outline-none focus:ring-2 focus:ring-brand transition-all placeholder:text-emerald-900/30"
                                         value={inputScores[i]}
                                         onChange={(e) => handleScoreChange(i, e.target.value)}
                                         onFocus={(e) => e.target.select()}
                                     />
                                 </div>
-                                <div className={`w-14 h-10 flex items-center justify-end font-bold text-lg ${previewPoints ? (previewPoints[i] > 0 ? 'text-blue-600' : previewPoints[i] < 0 ? 'text-red-500' : 'text-gray-500') : 'text-gray-300'
+                                <div className={`h-11 flex items-center justify-end font-bold font-outfit text-lg ${previewPoints ? (previewPoints[i] > 0 ? 'text-emerald-400' : previewPoints[i] < 0 ? 'text-rose-400' : 'text-emerald-900/40') : 'text-emerald-900/20'
                                     }`}>
-                                    {previewPoints ? (previewPoints[i] > 0 ? '+' : '') + previewPoints[i] : '-'}
+                                    <div className="bg-emerald-950/40 px-2 py-0.5 rounded-lg border border-emerald-900/20 min-w-[3rem] text-right">
+                                        {previewPoints ? (previewPoints[i] > 0 ? '+' : '') + previewPoints[i] : '-'}
+                                    </div>
                                 </div>
                             </div>
                         ))}

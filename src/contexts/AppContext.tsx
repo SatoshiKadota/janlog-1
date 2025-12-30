@@ -1,4 +1,4 @@
-import { createContext, useContext, type ReactNode } from 'react';
+import { createContext, useContext, useEffect, type ReactNode } from 'react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import type { GameSettings, Player, ScoreResult } from '../types';
 
@@ -26,6 +26,17 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     const [settings, setSettings] = useLocalStorage<GameSettings>('janlog_settings', defaultSettings);
     const [players, setPlayers] = useLocalStorage<Player[]>('janlog_players', []);
     const [results, setResults] = useLocalStorage<ScoreResult[]>('janlog_results', []);
+
+    // 異常値の自動クレンジング (2500030000問題など)
+    useEffect(() => {
+        if (settings.basePoint > 1000000 || settings.returnPoint > 1000000 || typeof settings.basePoint === 'string') {
+            setSettings({
+                ...settings,
+                basePoint: Number(settings.basePoint) > 1000000 ? 25000 : Number(settings.basePoint),
+                returnPoint: Number(settings.returnPoint) > 1000000 ? 30000 : Number(settings.returnPoint),
+            });
+        }
+    }, [settings, setSettings]);
 
     return (
         <AppContext.Provider value={{ settings, setSettings, players, setPlayers, results, setResults }}>

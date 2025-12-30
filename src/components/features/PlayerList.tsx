@@ -55,7 +55,7 @@ export function PlayerList() {
 
     return (
         <div className="space-y-4">
-            <h2 className="text-xl font-bold">プレイヤー管理</h2>
+            <h2 className="text-xl font-bold font-outfit text-emerald-400">プレイヤー管理</h2>
 
             <Card>
                 <CardHeader>
@@ -82,10 +82,10 @@ export function PlayerList() {
                 </CardHeader>
                 <CardContent className="space-y-2">
                     {players.length === 0 ? (
-                        <p className="text-gray-500 text-center py-4">登録プレイヤーはいません</p>
+                        <p className="text-emerald-800/60 text-center py-4">登録プレイヤーはいません</p>
                     ) : (
                         players.map(player => (
-                            <div key={player.id} className="flex items-center justify-between p-2 rounded hover:bg-gray-50 dark:hover:bg-gray-800 border-b border-gray-100 last:border-0 dark:border-gray-800">
+                            <div key={player.id} className="flex items-center justify-between p-2 rounded-xl hover:bg-emerald-500/10 border-b border-emerald-900/30 last:border-0">
                                 {editingId === player.id ? (
                                     <div className="flex gap-2 w-full">
                                         <Input
