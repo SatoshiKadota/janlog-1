@@ -17,10 +17,10 @@ export function ConfirmationModal({ isOpen, title = '確認', message, onConfirm
                 <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100">{title}</h3>
                 <p className="text-gray-600 dark:text-gray-300">{message}</p>
                 <div className="flex justify-end gap-3 pt-2">
-                    <Button variant="outline" onClick={onCancel}>
+                    <Button variant="secondary" onClick={onCancel}>
                         キャンセル
                     </Button>
-                    <Button variant="destructive" onClick={onConfirm}>
+                    <Button variant="danger" onClick={onConfirm}>
                         削除する
                     </Button>
                 </div>
