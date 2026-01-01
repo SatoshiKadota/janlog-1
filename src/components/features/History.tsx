@@ -67,21 +67,21 @@ export function History() {
                 <CardContent className="p-0">
                     <div className="overflow-x-auto scrollbar-hide">
                         <table className="w-full text-sm text-center border-collapse">
-                            <thead className="bg-emerald-950/80 text-emerald-500/80 text-[10px] font-bold uppercase tracking-wider border-b border-emerald-900/40">
+                            <thead className="bg-emerald-950/80 text-white text-[10px] font-bold uppercase tracking-wider border-b border-emerald-900/40">
                                 <tr>
                                     <th className="px-4 py-3">順位</th>
                                     <th className="px-4 py-3">名前</th>
                                     <th className="px-4 py-3">対局数</th>
-                                    <th className="px-4 py-3">合計</th>
+                                    <th className="px-4 py-3 text-white">合計</th>
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-emerald-900/20">
                                 {playerStats.map((stat, i) => (
-                                    <tr key={stat.id} className="hover:bg-emerald-500/5 transition-colors">
-                                        <td className="px-4 py-3 text-emerald-900/60 font-outfit">{i + 1}</td>
-                                        <td className="px-4 py-3 font-bold text-emerald-100">{stat.name}</td>
-                                        <td className="px-4 py-3 text-emerald-400/60 font-outfit">{stat.games}</td>
-                                        <td className={`px-4 py-3 font-bold font-outfit text-base ${stat.totalPoints > 0 ? 'text-emerald-400' : stat.totalPoints < 0 ? 'text-rose-400' : 'text-emerald-900/40'}`}>
+                                    <tr key={stat.id} className="hover:bg-emerald-500/5 transition-colors group">
+                                        <td className="px-4 py-4 text-white font-outfit text-xs">{i + 1}</td>
+                                        <td className="px-4 py-4 font-bold text-emerald-100">{stat.name}</td>
+                                        <td className="px-4 py-4 text-emerald-400/60 font-outfit">{stat.games}</td>
+                                        <td className={`px-4 py-4 font-bold font-outfit text-xl ${stat.totalPoints > 0 ? 'text-emerald-400 glow-text' : stat.totalPoints < 0 ? 'text-rose-400' : 'text-emerald-900/40'}`}>
                                             {stat.totalPoints > 0 ? '+' : ''}{stat.totalPoints.toFixed(1)}
                                         </td>
                                     </tr>

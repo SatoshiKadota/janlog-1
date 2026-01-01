@@ -12,11 +12,12 @@
 
 @layer components {
   .glass-panel {
-    @apply bg-emerald-900/20 backdrop-blur-xl border border-emerald-500/20 shadow-2xl;
+    @apply bg-emerald-950/40 backdrop-blur-md border border-emerald-500/20 shadow-xl;
+    background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 100%);
   }
 
   .glass-card {
-    @apply bg-emerald-950/40 backdrop-blur-md border border-emerald-800/30 shadow-xl transition-all duration-300;
+    @apply bg-emerald-900/10 backdrop-blur-sm border border-emerald-800/30 rounded-3xl overflow-hidden transition-all duration-300;
   }
 
   .interactive-button {
@@ -24,12 +25,42 @@
   }
 }
 
-/* Custom Gradients */
-.bg-mesh {
-  background-color: #011a14;
-  background-image:
-    radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.2) 0px, transparent 50%),
-    radial-gradient(at 100% 0%, rgba(52, 211, 153, 0.15) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.1) 0px, transparent 50%),
-    radial-gradient(at 0% 100%, rgba(5, 150, 105, 0.15) 0px, transparent 50%);
+@layer utilities {
+  .bg-mesh {
+    background-color: #011a14;
+    background-image:
+      radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.2) 10%, transparent 50%),
+      radial-gradient(at 50% 0%, rgba(52, 211, 153, 0.15) 10%, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(5, 150, 105, 0.15) 10%, transparent 50%),
+      radial-gradient(at 50% 100%, rgba(16, 185, 129, 0.1) 10%, transparent 50%);
+    background-size: 200% 200%;
+    animation: mesh-move 15s ease infinite;
+  }
+
+  @keyframes mesh-move {
+    0% {
+      background-position: 0% 0%;
+    }
+
+    50% {
+      background-position: 100% 100%;
+    }
+
+    100% {
+      background-position: 0% 0%;
+    }
+  }
+
+  .glow-text {
+    text-shadow: 0 0 10px rgba(52, 211, 153, 0.5), 0 0 20px rgba(52, 211, 153, 0.3);
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }

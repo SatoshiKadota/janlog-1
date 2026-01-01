@@ -29,17 +29,21 @@ export function Settings() {
                     <CardTitle>ゲームモード</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                    <div className="flex gap-2">
+                    <div className="flex gap-3">
                         <Button
-                            className="flex-1"
-                            variant={settings.mode === '4ma' ? 'primary' : 'outline'}
+                            className={`flex-1 h-16 text-lg font-bold transition-all ${settings.mode === '4ma'
+                                ? 'bg-white shadow-neon text-emerald-950 scale-[1.02]'
+                                : 'bg-emerald-950/20 text-emerald-700 border-emerald-900/30 opacity-40 hover:opacity-100'
+                                }`}
                             onClick={() => handleModeChange('4ma')}
                         >
                             4人麻雀
                         </Button>
                         <Button
-                            className="flex-1"
-                            variant={settings.mode === '3ma' ? 'primary' : 'outline'}
+                            className={`flex-1 h-16 text-lg font-bold transition-all ${settings.mode === '3ma'
+                                ? 'bg-white shadow-neon text-emerald-950 scale-[1.02]'
+                                : 'bg-emerald-950/20 text-emerald-700 border-emerald-900/30 opacity-40 hover:opacity-100'
+                                }`}
                             onClick={() => handleModeChange('3ma')}
                         >
                             3人麻雀

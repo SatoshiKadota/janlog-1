@@ -172,7 +172,7 @@ export function ScoreInput() {
                     <CardHeader className="pb-4">
                         <div className="flex justify-between items-end">
                             <CardTitle className="text-2xl">{editingId ? '修正中の対局' : '対局結果'}</CardTitle>
-                            <div className="text-xs font-bold font-outfit text-slate-400 uppercase tracking-widest">
+                            <div className="text-xs font-bold font-outfit text-white uppercase tracking-widest">
                                 TOTAL: <span className="text-white text-sm">{inputScores.reduce((a, b) => a + Number(b), 0)}</span> / {settings.basePoint * playerCount}
                             </div>
                         </div>
@@ -185,11 +185,11 @@ export function ScoreInput() {
                         )}
 
                         {Array.from({ length: playerCount }).map((_, i) => (
-                            <div key={i} className="grid grid-cols-[1fr_120px_80px] gap-3 items-end p-4 rounded-2xl bg-emerald-950/40 border border-emerald-900/40 hover:border-brand/40 transition-all group">
+                            <div key={i} className="grid grid-cols-[1fr_130px_90px] gap-4 items-end p-5 rounded-2xl bg-emerald-950/30 border border-emerald-900/20 hover:border-brand/40 hover:bg-emerald-950/50 transition-all group shadow-sm">
                                 <div className="space-y-1.5 min-w-0">
-                                    <label className="text-xs font-bold text-emerald-500/80 uppercase tracking-wider ml-1">{i + 1}着 (仮)</label>
+                                    <label className="text-xs font-bold text-emerald-500/80 uppercase tracking-widest ml-1">{i + 1}着 (仮)</label>
                                     <select
-                                        className="w-full h-11 rounded-xl border border-emerald-900/50 bg-emerald-950/60 px-3 text-sm text-emerald-50 focus:outline-none focus:ring-2 focus:ring-brand transition-all appearance-none"
+                                        className="w-full h-11 rounded-xl border border-emerald-900/50 bg-emerald-950/60 px-3 text-sm font-semibold text-emerald-50 focus:outline-none focus:ring-2 focus:ring-brand focus:shadow-neon transition-all appearance-none cursor-pointer"
                                         value={selectedPlayers[i]}
                                         onChange={(e) => handlePlayerSelect(i, e.target.value)}
                                     >
@@ -200,19 +200,19 @@ export function ScoreInput() {
                                     </select>
                                 </div>
                                 <div className="space-y-1.5">
-                                    <label className="text-xs font-bold text-emerald-500/80 uppercase tracking-wider ml-1">点数</label>
+                                    <label className="text-xs font-bold text-emerald-500/80 uppercase tracking-widest ml-1">点数</label>
                                     <input
                                         type="number"
                                         step="100"
-                                        className="w-full h-11 rounded-xl border border-emerald-900/50 bg-emerald-950/60 px-3 text-right font-outfit text-lg font-semibold text-emerald-400 focus:outline-none focus:ring-2 focus:ring-brand transition-all placeholder:text-emerald-900/30"
+                                        className="w-full h-11 rounded-xl border border-emerald-900/50 bg-emerald-950/60 px-3 text-right font-outfit text-xl font-bold text-emerald-400 focus:outline-none focus:ring-2 focus:ring-brand focus:shadow-neon transition-all placeholder:text-emerald-950/20"
                                         value={inputScores[i]}
                                         onChange={(e) => handleScoreChange(i, e.target.value)}
-                                        onFocus={(e) => e.target.select()}
+                                        onFocus={(e) => (e.target as HTMLInputElement).select()}
                                     />
                                 </div>
-                                <div className={`h-11 flex items-center justify-end font-bold font-outfit text-lg ${previewPoints ? (previewPoints[i] > 0 ? 'text-emerald-400' : previewPoints[i] < 0 ? 'text-rose-400' : 'text-emerald-900/40') : 'text-emerald-900/20'
+                                <div className={`h-11 flex items-center justify-end font-bold font-outfit text-xl ${previewPoints ? (previewPoints[i] > 0 ? 'text-emerald-400 glow-text' : previewPoints[i] < 0 ? 'text-rose-400' : 'text-emerald-900/40') : 'text-emerald-900/20'
                                     }`}>
-                                    <div className="bg-emerald-950/40 px-2 py-0.5 rounded-lg border border-emerald-900/20 min-w-[3rem] text-right">
+                                    <div className="bg-emerald-950/30 px-2 py-0.5 rounded-lg border border-emerald-900/20 min-w-[3.5rem] text-right">
                                         {previewPoints ? (previewPoints[i] > 0 ? '+' : '') + previewPoints[i] : '-'}
                                     </div>
                                 </div>

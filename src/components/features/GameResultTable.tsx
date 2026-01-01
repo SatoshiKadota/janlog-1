@@ -26,15 +26,15 @@ export function GameResultTable({ title, results, players, showDate = false, onE
                 <div className="overflow-x-auto scrollbar-hide">
                     <table className="w-full text-sm text-center border-collapse">
                         <thead>
-                            <tr className="bg-emerald-950/80 border-b border-emerald-900/40 text-emerald-500/80 uppercase tracking-wider text-[10px] font-bold">
+                            <tr className="bg-emerald-950/80 border-b border-emerald-900/40 text-white uppercase tracking-wider text-[10px] font-bold">
                                 <th className="p-3 min-w-[3rem]">回</th>
                                 {showDate && <th className="p-3 min-w-[4rem]">時刻</th>}
                                 {players.map(player => (
-                                    <th key={player.id} className="p-3 min-w-[5rem] font-bold whitespace-nowrap">
+                                    <th key={player.id} className="p-3 min-w-[5rem] font-bold whitespace-nowrap text-emerald-100">
                                         {player.name}
                                     </th>
                                 ))}
-                                <th className="p-3 min-w-[4rem] text-emerald-900/60 font-bold">{feeHeader}</th>
+                                <th className="p-3 min-w-[4rem] text-white font-bold">{feeHeader}</th>
                                 {(onEdit || onDelete) && <th className="p-3 min-w-[4rem]">操作</th>}
                             </tr>
                         </thead>
@@ -54,8 +54,8 @@ export function GameResultTable({ title, results, players, showDate = false, onE
 
                                     return (
                                         <tr key={result.id} className="hover:bg-emerald-500/5 transition-colors group">
-                                            <td className="p-3 text-emerald-900/60 text-[10px] font-outfit">{gameNumber}</td>
-                                            {showDate && <td className="p-3 text-emerald-900/60 text-[10px] font-outfit uppercase">{dateStr}</td>}
+                                            <td className="p-3 text-white text-[10px] font-outfit">{gameNumber}</td>
+                                            {showDate && <td className="p-3 text-white text-[10px] font-outfit uppercase">{dateStr}</td>}
 
                                             {players.map(player => {
                                                 const playerIndex = result.players.indexOf(player.id);
@@ -74,7 +74,7 @@ export function GameResultTable({ title, results, players, showDate = false, onE
                                                 );
                                             })}
 
-                                            <td className="p-3 text-emerald-900/60 text-[10px] font-outfit">
+                                            <td className="p-3 text-white text-[10px] font-outfit">
                                                 {result.feePoints !== undefined ? result.feePoints.toFixed(1) : (result.gameFee > 0 ? (result.gameFee / 100).toFixed(1) : '-')}
                                             </td>
 
@@ -118,7 +118,7 @@ export function GameResultTable({ title, results, players, showDate = false, onE
                             {/* Total Row */}
                             {results.length > 0 && (
                                 <tr className="bg-emerald-950/40 font-bold border-t border-emerald-900/40">
-                                    <td className="p-3 text-emerald-900/60 text-[10px] uppercase tracking-wider" colSpan={showDate ? 2 : 1}>合計</td>
+                                    <td className="p-3 text-white text-[10px] uppercase tracking-wider" colSpan={showDate ? 2 : 1}>合計</td>
                                     {players.map(player => {
                                         const total = results.reduce((acc, r) => {
                                             const idx = r.players.indexOf(player.id);
@@ -132,7 +132,7 @@ export function GameResultTable({ title, results, players, showDate = false, onE
                                             </td>
                                         );
                                     })}
-                                    <td className="p-3 text-emerald-900/60 font-outfit text-[10px]">
+                                    <td className="p-3 text-white font-outfit text-[10px]">
                                         {(() => {
                                             const totalFee = results.reduce((acc, r) => {
                                                 if (r.feePoints !== undefined) return acc + r.feePoints;
